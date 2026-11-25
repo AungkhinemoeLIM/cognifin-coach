@@ -12,7 +12,8 @@ Presentation: **Sat 28 Nov 2026** · Paper due: **Mon 30 Nov 2026 via LEB2** (PD
       an IEEE-style two-column layout rendered with ReportLab, and is ready to submit as-is.
 - [ ] **Live-LLM row (Table III, Fig. 6, slides 6 and 9).** At build time both Gemini models returned
       HTTP 429 (quota exhausted) on the configured key, so the paper states that this arm is pending
-      and reports only verified numbers. After the daily quota resets, run:
+      and reports only verified numbers. Rechecked on 25 Nov: 0/24 responses were model-written;
+      all used the offline fallback, so the live result remains pending. When API access is available, run:
       `python -m cognifin.evaluate --llm-check --out results && python paper/make_figures.py && python paper/build_paper.py && python presentation/build_slides.py`
       The check is resumable; rerun it until `written_by_model` in `results/llm_check.json` is 24, then
       commit and push the updated `results/`, `paper/` and `presentation/` files.
@@ -53,10 +54,11 @@ Presentation: **Sat 28 Nov 2026** · Paper due: **Mon 30 Nov 2026 via LEB2** (PD
 | Cognitive processing / inference | Bayesian trait bars moving with ± SD; mismatch reflection check; hasty/drawdown context; `demo/trace_demo.py` prints the posterior every turn |
 | Outputs & evaluation UI | LLM/offline-tagged message, "Why this?" with estimate ± SD and citation, 1–5 rating, reflection recap, CSV export |
 
-## Verified on this machine (24 Nov 2026)
+## Verified on this machine (25 Nov 2026)
 
 - `python -m pytest -q tests` → 39 passed
-- Evaluation, extra analyses, figures, paper and slides regenerated from the current code
-- Live Gemini calls (`gemini-3-flash-preview`, thinking level `low`) returned valid, grounded
-  50–66-word messages before the quota ran out. The second key is accepted by the API but was
-  rate-limited (429) on `gemini-3-flash-preview` and overloaded (503) on `gemini-3.8-flash`.
+- `python demo/trace_demo.py` completed the deterministic offline rehearsal trace
+- Evaluation, extra analyses, figures, paper and slides remain built from the current code
+- An earlier 24 Nov Gemini run produced valid, grounded 50–66-word messages before its quota
+  was exhausted. The 25 Nov resumable check produced 0/24 model-written messages; live-LLM
+  claims therefore remain pending.

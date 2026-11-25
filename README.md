@@ -90,7 +90,7 @@ explanation panel cannot hallucinate a citation.
 |---|---|
 | RQ1 trait estimation (top-trait accuracy) | quiz 0.790 → Bayesian 0.797 (legacy additive rule: 0.720). With a blind-spot quiz: 0.717 → 0.730 (legacy 0.657) |
 | RQ2 mismatch detection | recall 0.91, precision 0.64, FPR 0.34. Requiring ≥ 2 flagged turns: precision 0.74, FPR 0.12 |
-| RQ3 message grounding (24 scenarios) | rule templates cite the user's numbers 0% of the time; offline generator 83%, with every supplied mismatch used. The live LLM arm is pending: both Gemini models were over quota or overloaded (429/503) at build time; rerun `--llm-check` |
+| RQ3 message grounding (24 scenarios) | rule templates cite the user's numbers 0% of the time; offline generator 83%, with every supplied mismatch used. The live LLM arm is still pending: the 25 Nov recheck produced 0/24 model-written messages (all used offline fallback); rerun `--llm-check` when API access is available |
 | RQ4 shift (assumed heed) | identical at ρ = 1 by construction; Δ = 0.33 [0.18, 0.49] at ρ = 1.5 and 0.75 [0.53, 0.99] at ρ = 2 |
 
 ## Audit log (QA pass before submission)

@@ -71,7 +71,7 @@
       "cites_event_number": true,
       "mentions_mismatch": false,
       "has_why_this": true,
-      "latency_s": 3.35,
+      "latency_s": 2.33,
       "message": "This may be a one-off for you: you sold TECH right after it dropped 15.8%, which locked in a 18.2% loss versus your cost. That is a typical fast, emotional reaction to a sudden fall. You also decided quickly, which makes gut reactions more likely. Next time, pause one turn and ask whether anything about the asset itself has changed."
     },
     {
@@ -116,7 +116,7 @@
       "cites_event_number": true,
       "mentions_mismatch": false,
       "has_why_this": true,
-      "latency_s": 3.77,
+      "latency_s": 2.18,
       "message": "This may be a one-off for you: you bought TECH after it already gained 17.4%. Part of the pull may be the fear of missing out on a rally others are riding. You also decided quickly, which makes gut reactions more likely. Try a smaller position and decide in advance what price would make you wrong."
     },
     {
@@ -161,7 +161,7 @@
       "cites_event_number": true,
       "mentions_mismatch": false,
       "has_why_this": true,
-      "latency_s": 3.47,
+      "latency_s": 2.05,
       "message": "This may be a one-off for you: 83% of your portfolio now sits in TECH. Strong conviction can feel like knowledge, but it also concentrates your risk. Consider capping any single risky holding at a level you pick before the next swing."
     },
     {
@@ -206,7 +206,7 @@
       "cites_event_number": false,
       "mentions_mismatch": false,
       "has_why_this": true,
-      "latency_s": 5.05,
+      "latency_s": 1.99,
       "message": "This may be a one-off for you: you have traded five turns in a row. Frequent trading often reflects confidence in timing the market, yet it tends to add cost rather than return. Try skipping a turn on purpose to see whether holding changes how you feel."
     },
     {
@@ -251,7 +251,7 @@
       "cites_event_number": true,
       "mentions_mismatch": false,
       "has_why_this": true,
-      "latency_s": 3.85,
+      "latency_s": 2.24,
       "message": "This may be a one-off for you: INDEX has stayed 12.6% below your cost for 3 turns. Waiting for it to 'get back to even' is a common way losses feel hard to accept. Judge it as if you were choosing it fresh today, ignoring what you paid."
     },
     {
@@ -296,7 +296,7 @@
       "cites_event_number": true,
       "mentions_mismatch": false,
       "has_why_this": true,
-      "latency_s": 2.88,
+      "latency_s": 2.0,
       "message": "This may be a one-off for you: you cashed out a small 3.4% gain on INDEX while keeping TECH, which is down. Taking sure wins while holding losers is the classic disposition pattern. Apply the same rule to winners and losers: would you buy it today?"
     },
     {
@@ -341,7 +341,7 @@
       "cites_event_number": true,
       "mentions_mismatch": true,
       "has_why_this": true,
-      "latency_s": 3.18,
+      "latency_s": 2.02,
       "message": "This may be a one-off for you: you sold TECH right after it dropped 15.8%, which locked in a 18.2% loss versus your cost. That is a typical fast, emotional reaction to a sudden fall. You also decided quickly, which makes gut reactions more likely. In the quiz you said you are comfortable with high-risk investments, but here you sold after a 15.8% drop, locking in a loss. Next time, pause one turn and ask whether anything about the asset itself has changed."
     },
     {
@@ -386,7 +386,7 @@
       "cites_event_number": true,
       "mentions_mismatch": true,
       "has_why_this": true,
-      "latency_s": 4.72,
+      "latency_s": 2.19,
       "message": "This may be a one-off for you: you bought TECH after it already gained 17.4%. Part of the pull may be the fear of missing out on a rally others are riding. You also decided quickly, which makes gut reactions more likely. In the quiz you said you ignore what is trending, but here you bought TECH after a 17.4% run-up. Try a smaller position and decide in advance what price would make you wrong."
     },
     {
@@ -431,7 +431,7 @@
       "cites_event_number": true,
       "mentions_mismatch": false,
       "has_why_this": true,
-      "latency_s": 3.13,
+      "latency_s": 1.98,
       "message": "This may be a one-off for you: 83% of your portfolio now sits in TECH. Strong conviction can feel like knowledge, but it also concentrates your risk. Consider capping any single risky holding at a level you pick before the next swing."
     },
     {
@@ -476,7 +476,7 @@
       "cites_event_number": false,
       "mentions_mismatch": false,
       "has_why_this": true,
-      "latency_s": 11.09,
+      "latency_s": 1.96,
       "message": "This may be a one-off for you: you have traded five turns in a row. Frequent trading often reflects confidence in timing the market, yet it tends to add cost rather than return. Try skipping a turn on purpose to see whether holding changes how you feel."
     },
     {
@@ -521,7 +521,7 @@
       "cites_event_number": true,
       "mentions_mismatch": false,
       "has_why_this": true,
-      "latency_s": 3.18,
+      "latency_s": 1.96,
       "message": "This may be a one-off for you: INDEX has stayed 12.6% below your cost for 3 turns. Waiting for it to 'get back to even' is a common way losses feel hard to accept. Judge it as if you were choosing it fresh today, ignoring what you paid."
     },
     {
@@ -566,7 +566,7 @@
       "cites_event_number": true,
       "mentions_mismatch": false,
       "has_why_this": true,
-      "latency_s": 8.85,
+      "latency_s": 1.99,
       "message": "This may be a one-off for you: you cashed out a small 3.4% gain on INDEX while keeping TECH, which is down. Taking sure wins while holding losers is the classic disposition pattern. Apply the same rule to winners and losers: would you buy it today?"
     },
     {
@@ -611,7 +611,7 @@
       "cites_event_number": true,
       "mentions_mismatch": false,
       "has_why_this": true,
-      "latency_s": 3.33,
+      "latency_s": 1.95,
       "message": "This looks like a pattern for you: you sold TECH right after it dropped 15.8%, which locked in a 18.2% loss versus your cost. That is a typical fast, emotional reaction to a sudden fall. You also decided quickly, which makes gut reactions more likely. Next time, pause one turn and ask whether anything about the asset itself has changed."
     },
     {
@@ -656,7 +656,7 @@
       "cites_event_number": true,
       "mentions_mismatch": false,
       "has_why_this": true,
-      "latency_s": 15.09,
+      "latency_s": 2.0,
       "message": "This looks like a pattern for you: you bought TECH after it already gained 17.4%. Part of the pull may be the fear of missing out on a rally others are riding. You also decided quickly, which makes gut reactions more likely. Try a smaller position and decide in advance what price would make you wrong."
     },
     {
@@ -701,7 +701,7 @@
       "cites_event_number": true,
       "mentions_mismatch": false,
       "has_why_this": true,
-      "latency_s": 17.18,
+      "latency_s": 2.0,
       "message": "This looks like a pattern for you: 83% of your portfolio now sits in TECH. Strong conviction can feel like knowledge, but it also concentrates your risk. Consider capping any single risky holding at a level you pick before the next swing."
     },
     {
@@ -746,7 +746,7 @@
       "cites_event_number": false,
       "mentions_mismatch": false,
       "has_why_this": true,
-      "latency_s": 3.65,
+      "latency_s": 1.96,
       "message": "This looks like a pattern for you: you have traded five turns in a row. Frequent trading often reflects confidence in timing the market, yet it tends to add cost rather than return. Try skipping a turn on purpose to see whether holding changes how you feel."
     },
     {
@@ -791,7 +791,7 @@
       "cites_event_number": true,
       "mentions_mismatch": false,
       "has_why_this": true,
-      "latency_s": 3.42,
+      "latency_s": 1.97,
       "message": "This looks like a pattern for you: INDEX has stayed 12.6% below your cost for 3 turns. Waiting for it to 'get back to even' is a common way losses feel hard to accept. Judge it as if you were choosing it fresh today, ignoring what you paid."
     },
     {
@@ -836,7 +836,7 @@
       "cites_event_number": true,
       "mentions_mismatch": false,
       "has_why_this": true,
-      "latency_s": 3.41,
+      "latency_s": 1.95,
       "message": "This looks like a pattern for you: you cashed out a small 3.4% gain on INDEX while keeping TECH, which is down. Taking sure wins while holding losers is the classic disposition pattern. Apply the same rule to winners and losers: would you buy it today?"
     },
     {
@@ -881,7 +881,7 @@
       "cites_event_number": true,
       "mentions_mismatch": true,
       "has_why_this": true,
-      "latency_s": 2.49,
+      "latency_s": 1.98,
       "message": "This looks like a pattern for you: you sold TECH right after it dropped 15.8%, which locked in a 18.2% loss versus your cost. That is a typical fast, emotional reaction to a sudden fall. You also decided quickly, which makes gut reactions more likely. In the quiz you said you are comfortable with high-risk investments, but here you sold after a 15.8% drop, locking in a loss. Next time, pause one turn and ask whether anything about the asset itself has changed."
     },
     {
@@ -926,7 +926,7 @@
       "cites_event_number": true,
       "mentions_mismatch": true,
       "has_why_this": true,
-      "latency_s": 2.42,
+      "latency_s": 1.93,
       "message": "This looks like a pattern for you: you bought TECH after it already gained 17.4%. Part of the pull may be the fear of missing out on a rally others are riding. You also decided quickly, which makes gut reactions more likely. In the quiz you said you ignore what is trending, but here you bought TECH after a 17.4% run-up. Try a smaller position and decide in advance what price would make you wrong."
     },
     {
@@ -971,7 +971,7 @@
       "cites_event_number": true,
       "mentions_mismatch": false,
       "has_why_this": true,
-      "latency_s": 5.0,
+      "latency_s": 1.93,
       "message": "This looks like a pattern for you: 83% of your portfolio now sits in TECH. Strong conviction can feel like knowledge, but it also concentrates your risk. Consider capping any single risky holding at a level you pick before the next swing."
     },
     {
@@ -1016,7 +1016,7 @@
       "cites_event_number": false,
       "mentions_mismatch": false,
       "has_why_this": true,
-      "latency_s": 12.15,
+      "latency_s": 1.95,
       "message": "This looks like a pattern for you: you have traded five turns in a row. Frequent trading often reflects confidence in timing the market, yet it tends to add cost rather than return. Try skipping a turn on purpose to see whether holding changes how you feel."
     },
     {
@@ -1061,7 +1061,7 @@
       "cites_event_number": true,
       "mentions_mismatch": false,
       "has_why_this": true,
-      "latency_s": 2.44,
+      "latency_s": 1.99,
       "message": "This looks like a pattern for you: INDEX has stayed 12.6% below your cost for 3 turns. Waiting for it to 'get back to even' is a common way losses feel hard to accept. Judge it as if you were choosing it fresh today, ignoring what you paid."
     },
     {
@@ -1106,7 +1106,7 @@
       "cites_event_number": true,
       "mentions_mismatch": false,
       "has_why_this": true,
-      "latency_s": 3.22,
+      "latency_s": 1.97,
       "message": "This looks like a pattern for you: you cashed out a small 3.4% gain on INDEX while keeping TECH, which is down. Taking sure wins while holding losers is the classic disposition pattern. Apply the same rule to winners and losers: would you buy it today?"
     }
   ]
