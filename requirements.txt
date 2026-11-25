@@ -1,0 +1,4 @@
+pytest>=8
+# figure / paper / slide builders only (the app itself needs no third-party packages)
+matplotlib>=3.7
+reportlab>=4.0

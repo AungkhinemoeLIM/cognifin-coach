@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CogniFin Coach</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#1b2430;--mute:#64707f;--line:#e3e7ec;--acc:#2457d6;--acc2:#e8eefc;
+--ok:#1b8a5a;--warn:#b7791f;--bad:#c0392b;--c1:#2457d6;--c2:#1b8a5a;--c3:#d9772b}
+@media(prefers-color-scheme:dark){:root{--bg:#10151c;--card:#18202a;--ink:#e8edf3;--mute:#93a0b0;--line:#2a3441;--acc:#6b95ff;--acc2:#1e2a44;
+--ok:#4cc38a;--warn:#e0b050;--bad:#f0776a;--c1:#6b95ff;--c2:#4cc38a;--c3:#f0a060}}
+*{box-sizing:border-box}body{margin:0;font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink)}
+.wrap{max-width:1100px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:22px;margin:0}h2{font-size:16px;margin:0 0 10px}.sub{color:var(--mute);font-size:13px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:1.4fr 1fr;gap:14px}@media(max-width:820px){.grid{grid-template-columns:1fr}}
+button{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:8px 14px;cursor:pointer}
+button.primary{background:var(--acc);color:#fff;border-color:var(--acc)}button:disabled{opacity:.5;cursor:default}
+button.sel{background:var(--acc2);border-color:var(--acc)}
+input[type=text],select{font:inherit;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink)}
+.q{padding:10px 0;border-bottom:1px solid var(--line)}.q:last-child{border:0}
+.lik{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}.lik label{display:flex;align-items:center;gap:4px;padding:4px 10px;border:1px solid var(--line);border-radius:999px;cursor:pointer;font-size:13px}
+.lik input{margin:0}.scale{font-size:12px;color:var(--mute)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.spacer{flex:1}
+.kpi{display:flex;gap:18px;flex-wrap:wrap}.kpi div{min-width:90px}.kpi b{display:block;font-size:20px}
+table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:6px 4px;text-align:left;border-bottom:1px solid var(--line)}th{color:var(--mute);font-weight:500;font-size:12px}
+.up{color:var(--ok)}.down{color:var(--bad)}
+.decision-row{display:grid;grid-template-columns:minmax(120px,1fr) minmax(100px,.8fr) minmax(180px,1.8fr);gap:10px;align-items:center;padding:8px 0;border-top:1px solid var(--line)}
+.decision-row select{width:100%}.decision-amount{display:flex;align-items:center;gap:8px;min-width:0}
+.decision-amount input[type=range]{width:100%;min-width:60px}.allocation-error{color:var(--bad)}
+@media(max-width:520px){.decision-row{grid-template-columns:1fr 1fr}.decision-amount{grid-column:1/-1}}
+.plan-box{margin:12px 0}.plan-box input{width:min(100%,520px);margin-top:5px}
+.allocation-preview{margin:14px 0}.allocation-bar{height:14px;display:flex;overflow:hidden;border-radius:8px;background:var(--line);margin:7px 0}
+.allocation-bar span{height:100%;min-width:0}.allocation-legend{display:flex;gap:8px 14px;flex-wrap:wrap;font-size:12px;color:var(--mute)}
+.allocation-legend span{white-space:nowrap}.allocation-legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:4px}
+.reflection-panel{border-top:1px solid var(--line);margin-top:14px;padding-top:12px}
+.reflection-fields{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:8px}
+.reflection-fields select{max-width:280px}.recap{border-top:1px solid var(--line);margin-top:12px;padding-top:10px}
+.coach{border-left:4px solid var(--acc);background:var(--acc2);border-radius:8px;padding:12px;margin-bottom:10px}
+.coach.base{border-left-color:var(--mute);background:var(--bg)}
+.observation{border-left:4px solid var(--c2);background:var(--bg);border-radius:8px;padding:10px 12px;margin:8px 0;font-size:14px}
+.explanation{border-top:1px solid var(--line);margin-top:10px;padding-top:8px}
+.explanation p{margin:8px 0}.explanation .limits{color:var(--mute);font-size:13px}
+a.button{display:inline-block;text-decoration:none;font:inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:8px 14px;cursor:pointer}
+a.button.primary{background:var(--acc);color:#fff;border-color:var(--acc)}
+a.button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.tag{display:inline-block;font-size:11px;padding:1px 8px;border-radius:999px;border:1px solid var(--line);color:var(--mute);margin-right:4px}
+.mm{border-left:4px solid var(--warn);padding:8px 12px;margin:8px 0;background:var(--bg);border-radius:6px;font-size:14px}
+details{margin-top:8px;font-size:13px}summary{cursor:pointer;color:var(--acc);font-weight:600}
+.bar{height:8px;border-radius:4px;background:var(--line);position:relative;margin:3px 0 8px}.bar i{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:var(--acc)}
+.bar u{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--ink);opacity:.6}
+.stars button{padding:2px 8px}.hidden{display:none}
+svg text{fill:var(--mute);font-size:10px}
+.legend span{margin-right:12px;font-size:12px}.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>CogniFin Coach</h1>
+  <div class="sub">A cognitive-profile-aware financial decision coach. Simulation with synthetic prices only: no real money, no real market data.</div>
+  <div style="height:14px"></div>
+
+  <!-- SCREEN 1: quiz -->
+  <div id="s-quiz">
+    <div class="card">
+      <h2>1. Profile quiz</h2>
+      <div class="row">
+        <input type="text" id="uid" placeholder="Participant ID (e.g. P01)" value="P01">
+        <label class="sub">Coach:
+          <select id="mode">
+            <option value="llm">LLM coach (personalised, with "Why this?")</option>
+            <option value="baseline">Baseline (static rule templates)</option>
+            <option value="none">No coach (control)</option>
+            <option value="random">Random assignment (for study)</option>
+          </select></label>
+        <span class="tag" id="llmtag"></span>
+      </div>
+      <div class="plan-box">
+        <label for="plan"><b>My intention for this session</b></label><br>
+        <input type="text" id="plan" maxlength="160" placeholder="e.g. pause before reacting to a price drop">
+        <div class="sub">Optional. Use a learning intention, not a financial target; please don't enter private financial details.</div>
+      </div>
+      <div class="sub" style="margin-top:6px">Rate each statement from 1 (strongly disagree) to 5 (strongly agree). Answer honestly: there are no right answers.</div>
+      <div id="quiz"></div>
+      <button class="primary" id="start">Start simulation</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 2: game -->
+  <div id="s-game" class="hidden">
+    <div class="grid">
+      <div>
+        <div class="card">
+          <div class="row"><h2 id="turnlbl" style="margin:0"></h2><span class="spacer"></span><span class="tag" id="modetag"></span></div>
+          <div class="kpi" style="margin:10px 0">
+            <div><span class="sub">Portfolio value</span><b id="val"></b></div>
+            <div><span class="sub">Cash</span><b id="cash"></b></div>
+            <div><span class="sub">Return</span><b id="retn"></b></div>
+          </div>
+          <div id="chart"></div>
+          <div class="legend" id="legend"></div>
+        </div>
+        <div class="card">
+          <h2>Your decisions this turn</h2>
+          <table id="holdings"></table>
+          <div class="allocation-preview">
+            <div class="row"><b>Estimated allocation if confirmed</b><span class="spacer"></span><span class="sub" id="allocation-total"></span></div>
+            <div id="allocation-bar" class="allocation-bar" role="img" aria-label="Estimated portfolio allocation"></div>
+            <div id="allocation-legend" class="allocation-legend"></div>
+          </div>
+          <div id="decision-controls"></div>
+          <div id="allocation-summary" class="sub" style="margin-top:8px"></div>
+          <div class="reflection-panel">
+            <b>Quick reflection</b><span class="sub"> (optional)</span>
+            <div class="reflection-fields">
+              <label class="sub" for="decision-reason">What influenced these choices?
+                <select id="decision-reason">
+                  <option value="not_recorded">Skip this reflection</option>
+                  <option value="following_plan">Following my plan</option>
+                  <option value="reacting_to_price_change">Reacting to a recent price change</option>
+                  <option value="managing_allocation">Managing my asset allocation</option>
+                  <option value="exploring">Exploring the simulation</option>
+                  <option value="other">Another reason</option>
+                </select>
+              </label>
+              <div><label class="sub"><input type="checkbox" id="record-confidence"> Record confidence (optional)</label>
+                <label class="sub" for="confidence"> <b id="confidence-value">—</b><span id="confidence-scale"></span>
+                  <input type="range" id="confidence" min="1" max="5" step="1" value="3" disabled>
+                </label></div>
+            </div>
+          </div>
+          <div class="row" style="margin-top:12px"><button class="primary" id="go">Confirm all decisions</button><span class="sub" id="timer"></span></div>
+        </div>
+      </div>
+      <div>
+        <div class="card"><h2>Coach</h2><div class="sub">Detected patterns are tentative reflections based on simple rules, not diagnoses or investment advice.</div><div id="coach" class="sub" style="margin-top:8px">Make your first decision. The coach speaks up when it notices a decision pattern.</div></div>
+        <div class="card" id="profcard"><h2>Your adaptive profile</h2><div class="sub">Bar = current Bayesian estimate (quiz prior updated by fired vs. resisted opportunities in play); &plusmn; = posterior SD; obs = opportunities observed. Tick = your quiz result.</div><div id="prof" style="margin-top:8px"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 3: done -->
+  <div id="s-done" class="hidden">
+    <div class="card"><h2>Simulation complete</h2><div id="summary"></div>
+      <div class="row" style="margin-top:12px"><a id="csv" class="button primary" download>Download session log (CSV)</a><button onclick="location.reload()">New session</button></div></div>
+  </div>
+</div>
+
+<script>
+const $=s=>document.querySelector(s);
+const LABEL={loss_aversion:'Loss aversion',overconfidence:'Overconfidence',herding_fomo:'Herding / FOMO',panic_selling:'Panic selling'};
+const COL={BOND:'var(--c2)',INDEX:'var(--c1)',TECH:'var(--c3)'};
+let sid=null,state=null,t0=0,tick=null;
+const fmt=x=>'$'+Number(x).toLocaleString(undefined,{maximumFractionDigits:0});
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+async function api(p,o){const r=await fetch(p,o);return r.json()}
+const post=(p,b)=>api(p,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});
+
+async function init(){
+  const q=await api('/api/quiz');
+  $('#llmtag').textContent=q.llm_available?'Google AI Studio connected':'offline generator (no API key)';
+  $('#quiz').innerHTML=q.items.map((it,i)=>`<div class="q"><div>${i+1}. ${esc(it.text)}</div><div class="lik">`+
+    [1,2,3,4,5].map(v=>`<label><input type="radio" name="${it.id}" value="${v}"${v==3?' checked':''}>${v}</label>`).join('')+`</div></div>`).join('');
+}
+$('#start').onclick=async()=>{
+  const answers={};document.querySelectorAll('#quiz input:checked').forEach(i=>answers[i.name]=+i.value);
+  const seedParam=new URLSearchParams(location.search).get('seed');   // e.g. ?seed=42 for a repeatable demo
+  state=await post('/api/start',{user_id:$('#uid').value||'anon',answers,coach_mode:$('#mode').value,plan:$('#plan').value,
+    seed:seedParam&&/^\d+$/.test(seedParam)?parseInt(seedParam,10):null});
+  sid=state.session_id;$('#s-quiz').classList.add('hidden');$('#s-game').classList.remove('hidden');
+  $('#modetag').textContent='coach: '+(state.coach_mode==='llm'?'LLM':state.coach_mode);
+  $('#profcard').classList.toggle('hidden',state.coach_mode!=='llm');
+  render();
+};
+function chart(){
+  const W=520,H=190,P=28,n=state.n_turns;let all=[];
+  for(const a in state.prices)all.push(...state.prices[a]);
+  const lo=Math.min(...all)*.97,hi=Math.max(...all)*1.03;
+  const x=i=>P+i*(W-P-8)/n,y=v=>H-P-(v-lo)/(hi-lo)*(H-P-8);
+  let s=`<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Synthetic price chart">`;
+  for(let k=0;k<=3;k++){const v=lo+(hi-lo)*k/3;s+=`<line x1="${P}" x2="${W-8}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)"/><text x="2" y="${y(v)+3}">${v.toFixed(0)}</text>`}
+  for(const a in state.prices){const p=state.prices[a];
+    s+=`<polyline fill="none" stroke="${COL[a]}" stroke-width="2" points="${p.map((v,i)=>x(i)+','+y(v)).join(' ')}"/>`}
+  $('#chart').innerHTML=s+'</svg>';
+  $('#legend').innerHTML=Object.keys(COL).map(a=>`<span><i style="background:${COL[a]}"></i>${state.assets[a]}</span>`).join('');
+}
+function render(){
+  $('#turnlbl').textContent=`Turn ${Math.min(state.turn+1,state.n_turns)} of ${state.n_turns}`;
+  $('#val').textContent=fmt(state.value);$('#cash').textContent=fmt(state.cash);
+  const r=(state.value/10000-1)*100;$('#retn').textContent=(r>=0?'+':'')+r.toFixed(1)+'%';$('#retn').className=r>=0?'up':'down';
+  chart();
+  let h='<tr><th>Asset</th><th>Price</th><th>Last turn</th><th>Held</th><th>vs cost</th></tr>';
+  for(const a in state.assets){const p=state.prices[a],cur=p[p.length-1],prev=p[p.length-2]??cur,ch=(cur/prev-1)*100;
+    const held=state.units[a]*cur,vs=state.cost[a]?(cur/state.cost[a]-1)*100:null;
+    h+=`<tr><td>${state.assets[a]}</td><td>${cur.toFixed(2)}</td><td class="${ch>=0?'up':'down'}">${ch>=0?'+':''}${ch.toFixed(1)}%</td><td>${fmt(held)}</td><td class="${vs>=0?'up':'down'}">${vs===null?'-':(vs>=0?'+':'')+vs.toFixed(1)+'%'}</td></tr>`}
+  $('#holdings').innerHTML=h;
+  $('#decision-controls').innerHTML=Object.keys(state.assets).map(a=>
+    `<div class="decision-row"><div><b>${state.assets[a]}</b><div class="sub">Held: ${fmt(state.units[a]*state.prices[a][state.prices[a].length-1])}</div></div>
+     <select class="asset-decision" id="decision-${a}" aria-label="Decision for ${state.assets[a]}">
+       <option value="hold" selected>Hold</option><option value="buy">Buy</option><option value="sell">Sell</option>
+     </select>
+     <label class="decision-amount"><span class="sub">Amount</span><input type="range" min="0" max="100" step="5" value="0" id="fraction-${a}" aria-label="Amount for ${state.assets[a]}">
+     <b id="fraction-label-${a}">—</b></label></div>`).join('');
+  document.querySelectorAll('.asset-decision, .decision-amount input').forEach(el=>
+    el.addEventListener('input', updateDecisionControls));
+  document.querySelectorAll('.asset-decision').forEach(el=>
+    el.addEventListener('change', updateDecisionControls));
+  updateDecisionControls();
+  $('#decision-reason').value='not_recorded';
+  $('#record-confidence').checked=false;
+  $('#confidence').value=3;
+  $('#confidence').disabled=true;
+  $('#confidence-value').textContent='—';
+  $('#confidence-scale').textContent='';
+  if(state.coach_mode==='llm')profile();
+  t0=Date.now();clearInterval(tick);tick=setInterval(()=>$('#timer').textContent=((Date.now()-t0)/1000).toFixed(0)+'s on these decisions',500);
+}
+function updateDecisionControls(){
+  let buyTotal=0;
+  for(const a of Object.keys(state.assets)){
+    const type=$(`#decision-${a}`).value,amount=$(`#fraction-${a}`);
+    amount.disabled=type==='hold';
+    const label=type==='buy'?`${amount.value}% of start cash`:type==='sell'?`${amount.value}% of holding`:'—';
+    $(`#fraction-label-${a}`).textContent=label;
+    if(type==='buy')buyTotal+=Number(amount.value);
+  }
+  const overBudget=buyTotal>100;
+  $('#allocation-summary').textContent=overBudget
+    ?`Buy allocations total ${buyTotal}% and exceed the 100% starting-cash limit.`
+    :`Buy allocation: ${buyTotal}% of starting cash. Sell amounts apply separately to each holding.`;
+  $('#allocation-summary').classList.toggle('allocation-error',overBudget);
+  $('#go').disabled=overBudget;
+  renderAllocationPreview();
+}
+function renderAllocationPreview(){
+  const prices={},units={...state.units},startingCash=state.cash;
+  for(const a of Object.keys(state.assets))prices[a]=state.prices[a][state.prices[a].length-1];
+  let cash=startingCash;
+  for(const a of Object.keys(state.assets)){
+    if($(`#decision-${a}`).value==='sell'){
+      const sold=units[a]*(+$(`#fraction-${a}`).value)/100;
+      units[a]-=sold;cash+=sold*prices[a];
+    }
+  }
+  for(const a of Object.keys(state.assets)){
+    if($(`#decision-${a}`).value==='buy'){
+      const spend=startingCash*(+$(`#fraction-${a}`).value)/100;
+      units[a]+=prices[a]?spend/prices[a]:0;cash-=spend;
+    }
+  }
+  const values={...Object.fromEntries(Object.keys(state.assets).map(a=>[a,units[a]*prices[a]])),CASH:Math.max(0,cash)};
+  const total=Object.values(values).reduce((sum,value)=>sum+value,0)||1;
+  const colors={...COL,CASH:'var(--line)'};
+  $('#allocation-bar').innerHTML=Object.entries(values).map(([a,value])=>
+    `<span title="${a==='CASH'?'Cash':state.assets[a]}: ${(value/total*100).toFixed(1)}%" style="width:${value/total*100}%;background:${colors[a]}"></span>`).join('');
+  $('#allocation-legend').innerHTML=Object.entries(values).map(([a,value])=>
+    `<span><i style="background:${colors[a]}"></i>${a==='CASH'?'Cash':state.assets[a]} ${(value/total*100).toFixed(0)}%</span>`).join('');
+  $('#allocation-total').textContent=`${fmt(total)} projected portfolio`;
+}
+$('#record-confidence').onchange=()=>{
+  $('#confidence').disabled=!$('#record-confidence').checked;
+  $('#confidence-value').textContent=$('#record-confidence').checked?$('#confidence').value:'—';
+  $('#confidence-scale').textContent=$('#record-confidence').checked?'/5':'';
+};
+$('#confidence').oninput=()=>$('#confidence-value').textContent=$('#confidence').value;
+function profile(){
+  const p=state.profile;$('#prof').innerHTML=Object.keys(LABEL).map(k=>
+    `<div><div class="row"><span>${LABEL[k]}</span><span class="spacer"></span><span class="sub">${(p.long_term[k]*100).toFixed(0)}%${p.uncertainty?` \u00b1 ${(p.uncertainty[k]*100).toFixed(0)}% \u00b7 ${p.evidence?Math.round(p.evidence[k][0]+p.evidence[k][1]):0} obs`:''}</span></div>
+     <div class="bar"><i style="width:${p.long_term[k]*100}%"></i><u style="left:${p.quiz_traits[k]*100}%"></u></div></div>`).join('')
+    +(p.short_term.hasty?'<span class="tag">session context: quick decisions</span>':'')
+    +(p.short_term.drawdown>.08?'<span class="tag">session context: portfolio under stress</span>':'');
+}
+function coachHTML(res){
+  let h='';
+  for(const m of res.mismatches){h+=`<div class="mm"><b>Reflection check:</b> you reported that you ${esc(m.claim)}, while this turn you ${esc(m.behaviour)}. This may be worth reflecting on.</div>`}
+  for(const c of res.coaching){
+    h+=`<div class="coach ${c.mode==='baseline'?'base':''}"><span class="tag">${c.mode==='llm'?(c.source==='llm'?'LLM':'offline generator'):'rule template'}</span>${esc(c.message)}`;
+    if(c.why_this){const w=c.why_this;
+      const evidence=w.event_evidence||JSON.stringify(w.triggered_by);
+      const profileNote=w.profile_note||`Adaptive estimate ${(w.trait_score*100).toFixed(0)}%; quiz starting score ${(w.quiz_score*100).toFixed(0)}% (${w.intensity}).`;
+      h+=`<details><summary>Why might this pattern apply?</summary><div class="explanation">
+      <p><b>What the rule noticed:</b> ${esc(evidence)}</p>
+      <p><b>Pattern:</b> ${esc(w.trait)}. ${esc(w.event_mechanism||w.trait_definition||'')}</p>
+      ${w.trait_definition?`<p><b>How the concept is defined:</b> ${esc(w.trait_definition)}</p>`:''}
+      <p><b>Your profile context:</b> ${esc(profileNote)}</p>
+      <p><b>Session context:</b> quick decision: ${w.context.hasty?'yes':'no'}; portfolio drawdown: ${w.context.drawdown_pct}%.</p>
+      ${w.mismatches&&w.mismatches.length?`<p><b>Quiz comparison:</b> ${w.mismatches.map(m=>`you reported that you ${esc(m.claimed)}, while this turn you ${esc(m.did)}`).join('; ')}.</p>`:''}
+      <p><b>Research background:</b> ${esc(w.research)}</p>
+      <p><b>Sources:</b> ${esc(w.citation)}</p>
+      ${w.reflection_question?`<p><b>Consider:</b> ${esc(w.reflection_question)}</p>`:''}
+      <p class="limits"><b>Limits:</b> ${esc(w.limitations||'This rule suggests a possible pattern; it cannot establish your motive or diagnose a stable trait.')}</p>
+      </div></details>`}
+    h+=`<div class="stars" style="margin-top:8px"><span class="sub">Did this match how you were thinking? </span>`+
+      [1,2,3,4,5].map(v=>`<button onclick="rate(${res.state.turn},${v},this)">${v}</button>`).join('')+`</div></div>`;
+  }
+  for(const observation of res.observations||[]){
+    h+=`<div class="observation"><b>Context noticed (not a bias diagnosis):</b> ${esc(observation.description)}</div>`;
+  }
+  return h;
+}
+async function rate(turn,v,el){await post(`/api/session/${sid}/rate`,{turn,rating:v});[...el.parentNode.querySelectorAll('button')].forEach(b=>b.classList.toggle('sel',b===el))}
+$('#go').onclick=async()=>{
+  $('#go').disabled=true;
+  const ms=Date.now()-t0;
+  const actions=Object.keys(state.assets).map(asset=>({
+    asset,type:$(`#decision-${asset}`).value,fraction:(+$(`#fraction-${asset}`).value)/100
+  }));
+  const res=await post(`/api/session/${sid}/step`,{actions,decision_ms:ms,
+    decision_reason:$('#decision-reason').value,
+    confidence:$('#record-confidence').checked?+$('#confidence').value:null});
+  $('#go').disabled=false;
+  if(res.error){alert(res.error);return}
+  state=res.state;
+  const h=coachHTML(res);
+  $('#coach').innerHTML=h||`<span class="sub">Turn ${state.turn}: no strict bias rule triggered and no notable market-reaction context was observed.</span>`;
+  if(state.done){clearInterval(tick);finish(h)}else render();
+};
+async function finish(lastCoach){
+  $('#s-game').classList.add('hidden');$('#s-done').classList.remove('hidden');
+  const r=(state.value/10000-1)*100;
+  $('#csv').href=`/api/session/${sid}/export`;
+  const recap=await api(`/api/session/${sid}/summary`);
+  if(recap.error){$('#summary').textContent='The session ended, but the reflection recap could not be loaded.';return}
+  const actionCounts=recap.actions_by_asset||{};
+  const actions=Object.entries(actionCounts).map(([a,c])=>
+    `${esc(state.assets[a])}: ${c.buy} buy, ${c.sell} sell, ${c.hold} hold`).join(' · ');
+  const events=Object.entries(recap.event_counts||{}).map(([e,n])=>`${esc(e.replace(/_/g,' '))}: ${n}`).join(' · ')||'No patterns were flagged by the prototype rules.';
+  const observations=Object.entries(recap.observation_counts||{}).map(([e,n])=>`${esc(e.replace(/_/g,' '))}: ${n}`).join(' · ')||'No notable market-reaction contexts were observed.';
+  const trades=Object.values(actionCounts).reduce((sum,c)=>sum+c.buy+c.sell,0);
+  const average=recap.average_confidence===null?'No confidence ratings recorded':`${recap.average_confidence}/5 average confidence`;
+  $('#summary').innerHTML=`<div class="recap"><h3>Reflection recap</h3>
+    <p><b>Your intention:</b> ${esc(recap.plan)}</p>
+    <p><b>Choices by asset:</b> ${actions}</p>
+    <p><b>Decision activity:</b> ${trades} trade${trades===1?'':'s'} across ${recap.turns_completed} turns.</p>
+    <p><b>Bias signals:</b> ${events}</p>
+    <p><b>Market-reaction observations:</b> ${observations}</p>
+    <p><b>Reflection:</b> ${recap.reflection_turns||0}/${recap.turns_completed??state.turn} turns included a reason; ${average}.</p>
+    <p class="sub">These are learning notes from a synthetic simulation, not a score of decision quality.</p>
+    <p><b>Simulation outcome:</b> ${fmt(state.value)} (${r>=0?'+':''}${r.toFixed(1)}%).</p>
+    <p class="sub">Your session log, coach messages, and reflections can be exported as CSV.</p></div>`+(lastCoach?`<div style="margin-top:12px">${lastCoach}</div>`:'');
+}
+init();
+</script>
+</body>
+</html>
